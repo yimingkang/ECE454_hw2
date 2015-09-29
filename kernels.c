@@ -16,8 +16,8 @@ team_t team = {
     "Ryan Kang",     /* First member full name */
     "yiming.kang@mail.utoronto.ca",  /* First member email address */
 
-    "",                   /* Second member full name (leave blank if none) */
-    ""                    /* Second member email addr (leave blank if none) */
+    "Zexuan Wang",                   /* Second member full name (leave blank if none) */
+    "zexuan.wang@mail.utoronto.ca"                    /* Second member email addr (leave blank if none) */
 };
 
 /***************
