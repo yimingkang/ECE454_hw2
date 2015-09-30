@@ -63,9 +63,10 @@ void rotate(int dim, pixel *src, pixel *dst) {
 		int baseI = x*tile_size;
 		for (y=0; y<tile_num; y++){
 			int baseJ = y*tile_size;
-			for (i = 0; i < tile_size; i++)
-				for (j = 0; j < tile_size; j++)
+			for (j = 0; j < tile_size; j++)
+				for (i = 0; i < tile_size; i++)
 					dst[RIDX(dim-1-baseJ-j, baseI+i, dim)] = src[RIDX(baseI+i, baseJ+j, dim)];
+					/* dst[RIDX(dim-1-baseJ-j, baseI+i, dim)] = src[RIDX(baseI+i, baseJ+j, dim)]; */
 		}
 	}
 }
