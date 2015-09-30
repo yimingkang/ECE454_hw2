@@ -51,20 +51,25 @@ void naive_rotate(int dim, pixel *src, pixel *dst)
  */
 char rotate_descr[] = "rotate: Current working version - tileSize = 1024";
 void rotate(int dim, pixel *src, pixel *dst) {
+    if( dim == 96){
+        return naive_rotate(dim, src, dst);
+    }
+    int tile_size_i = dim > 700 ? 64 : 32;
+    int tile_size_j = dim > 700 ? 16 : 8;
+
+    int tile_count_i = dim / tile_size_i;
+    int tile_count_j = dim / tile_size_j;
+
 	/* if (dim < 256) */
 	/* 	return naive_rotate(dim, src, dst); */
-	int tile_num = dim/8;
-	if (dim <= 256)
-		tile_num = 8;
-	int tile_size = dim/tile_num;
 	int i, j, x, y;
 
-	for (x=0; x<tile_num; x++){
-		int baseI = x*tile_size;
-		for (y=0; y<tile_num; y++){
-			int baseJ = y*tile_size;
-			for (i = 0; i < tile_size; i++)
-				for (j = 0; j < tile_size; j++)
+	for (x=0; x<tile_count_i; x++){
+		int baseI = x*tile_size_i;
+		for (y=0; y<tile_count_j; y++){
+			int baseJ = y*tile_size_j;
+			for (j = 0; j < tile_size_j; j++)
+				for (i = 0; i < tile_size_i; i++)
 					dst[RIDX(dim-1-baseJ-j, baseI+i, dim)] = src[RIDX(baseI+i, baseJ+j, dim)];
 		}
 	}
