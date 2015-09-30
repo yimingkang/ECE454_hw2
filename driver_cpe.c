@@ -53,7 +53,7 @@ typedef struct {
 } bench_t;
 
 /* The range of image dimensions that we will be testing */
-//static int test_dim_rotate[] = {64, 128, 256, 512, 1024, };
+/* static int test_dim_rotate[] = {256, 512, 1024, }; */
 static int test_dim_rotate[] = {64, 128, 256, 512, 1024,2048,4096};
 
 
