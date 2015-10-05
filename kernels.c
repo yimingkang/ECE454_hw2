@@ -53,20 +53,25 @@ char rotate_descr[] = "rotate: Current working version - tileSize = 1024";
 void rotate(int dim, pixel *src, pixel *dst) {
 	/* if (dim < 256) */
 	/* 	return naive_rotate(dim, src, dst); */
-	int tile_num = dim/8;
-	if (dim <= 256)
-		tile_num = 8;
-	int tile_size = dim/tile_num;
-	int i, j, x, y;
+	int tile_size_x, tile_size_y;
+	if (dim <= 1024) {
+		tile_size_x = 32;
+		tile_size_y = 2;
+	} else {
+		tile_size_x = 16;
+		tile_size_y = 2;
+	}
+	int i, j, x, y, i_limit, j_limit;
 
-	for (x=0; x<tile_num; x++){
-		int baseI = x*tile_size;
-		for (y=0; y<tile_num; y++){
-			int baseJ = y*tile_size;
-			for (j = 0; j < tile_size; j++)
-				for (i = 0; i < tile_size; i++)
-					dst[RIDX(dim-1-baseJ-j, baseI+i, dim)] = src[RIDX(baseI+i, baseJ+j, dim)];
-					/* dst[RIDX(dim-1-baseJ-j, baseI+i, dim)] = src[RIDX(baseI+i, baseJ+j, dim)]; */
+	for (x=0; x<dim; x+=tile_size_x){
+		i_limit = (dim > x+tile_size_x) ? (x+tile_size_x) : dim;
+		for (y=0; y<dim; y+=tile_size_y){
+			j_limit = (dim > y+tile_size_y) ? (y+tile_size_y) : dim;
+			for (j = y; j < j_limit; j++){
+				for (i = x; i < i_limit; i++){
+					dst[RIDX(dim-1-j, i, dim)] = src[RIDX(i, j, dim)];
+				}
+			}
 		}
 	}
 }
@@ -83,8 +88,8 @@ void attempt_three(int dim, pixel *src, pixel *dst) {
 		int baseI = x*tile_size;
 		for (y=0; y<tile_num; y++){
 			int baseJ = y*tile_size;
-			for (i = 0; i < tile_size; i++)
-				for (j = 0; j < tile_size; j++)
+			for (j = 0; j < tile_size; j++)
+				for (i = 0; i < tile_size; i++)
 					dst[RIDX(dim-1-baseJ-j, baseI+i, dim)] = src[RIDX(baseI+i, baseJ+j, dim)];
 		}
 	}
@@ -232,30 +237,34 @@ void attempt_eleven(int dim, pixel *src, pixel *dst) {
 	}
 }
 
-
-
-
 /* second attempt */
 char rotate_two_descr[] = "second attempt";
 int logBase2(int dim){
 	int result = 1;
-	while (dim>>1 != 0) {
+	while (dim != 0) {
 		result++;
+		dim >>=1;
 	}
 	return result;
 }
 void attempt_two(int dim, pixel *src, pixel *dst)
 {
-	int i, j, srcIndex, dstIndex;
-	int log_dim = logBase2(dim);
+	/* if (dim < 256) */
+	/* 	return naive_rotate(dim, src, dst); */
+	int tile_num = dim/8;
+	if (dim <= 256)
+		tile_num = 8;
+	int tile_size = dim/tile_num;
+	int i, j, x, y;
 
-	for (i = 0; i < dim; i++){
-		srcIndex = i<<log_dim;
-		for (j = 0; j < dim; j+=4){
-			dst[((dim-1-j)<<log_dim)+i] = src[(srcIndex+j)];
-			dst[((dim-1-j-1)<<log_dim)+i] = src[(srcIndex+j+1)];
-			dst[((dim-1-j-2)<<log_dim)+i] = src[(srcIndex+j+2)];
-			dst[((dim-1-j-3)<<log_dim)+i] = src[(srcIndex+j+3)];
+	for (x=0; x<tile_num; x++){
+		int baseI = x*tile_size;
+		for (y=0; y<tile_num; y++){
+			int baseJ = y*tile_size;
+			for (j = 0; j < tile_size; j++)
+				for (i = 0; i < tile_size; i++)
+					dst[RIDX(dim-1-baseJ-j, baseI+i, dim)] = src[RIDX(baseI+i, baseJ+j, dim)];
+					/* dst[RIDX(dim-1-baseJ-j, baseI+i, dim)] = src[RIDX(baseI+i, baseJ+j, dim)]; */
 		}
 	}
 }
