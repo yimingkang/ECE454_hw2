@@ -23,7 +23,7 @@ Implementation:
   * We found that this is already done by the compiler in -O2
 
 3. Code motion
-  * The preprocessor macro RIDX has a multiplication that can be moved outside of the innermost loop. However doing so had no influence in performance
+  * The preprocessor macro RIDX has a multiplication that can be moved outside of the innermost loop. However doing so had no influence in performance and it's most likely already done by the compiler.
 
 
 Scripts:
