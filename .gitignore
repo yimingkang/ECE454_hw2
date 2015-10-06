@@ -34,3 +34,4 @@
 # ignore binary
 driver_cpe
 .nfs*
+venv
