@@ -51,8 +51,6 @@ void naive_rotate(int dim, pixel *src, pixel *dst)
  */
 char rotate_descr[] = "rotate: Current working version - tileSize = 1024";
 void rotate(int dim, pixel *src, pixel *dst) {
-	/* if (dim < 256) */
-	/* 	return naive_rotate(dim, src, dst); */
 	int tile_size_x, tile_size_y;
 	if (dim <= 1024) {
 		tile_size_x = 32;
@@ -249,24 +247,6 @@ int logBase2(int dim){
 }
 void attempt_two(int dim, pixel *src, pixel *dst)
 {
-	/* if (dim < 256) */
-	/* 	return naive_rotate(dim, src, dst); */
-	int tile_num = dim/8;
-	if (dim <= 256)
-		tile_num = 8;
-	int tile_size = dim/tile_num;
-	int i, j, x, y;
-
-	for (x=0; x<tile_num; x++){
-		int baseI = x*tile_size;
-		for (y=0; y<tile_num; y++){
-			int baseJ = y*tile_size;
-			for (j = 0; j < tile_size; j++)
-				for (i = 0; i < tile_size; i++)
-					dst[RIDX(dim-1-baseJ-j, baseI+i, dim)] = src[RIDX(baseI+i, baseJ+j, dim)];
-					/* dst[RIDX(dim-1-baseJ-j, baseI+i, dim)] = src[RIDX(baseI+i, baseJ+j, dim)]; */
-		}
-	}
 }
 
 /*********************************************************************
