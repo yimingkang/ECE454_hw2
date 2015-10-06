@@ -12,6 +12,11 @@ Implementation:
   * Each pixel has 3 shorts (6 bytes). L1 cache is able to fit 32 * 1024 / 6 = 5461 pixels
   * Since we used src and dst matricies, each matrix has a max size of 5461/2 = 3720 pixels
   * We used a scrpit to find the best dimensions for the matrices (see script\_1)
+  * The best dimensions are:
+  * | Matrix size | Src len (pixel) | Src width (pixel) |
+  * | ----------- | --------------- | ----------------- |
+  * | < 1024      | 32              | 2                 |
+  * | > 1024      | 16              | 8                 |
 
 2. Loop unrolling
   * We found that this is already done by the compiler in -O2

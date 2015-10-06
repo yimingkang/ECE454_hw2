@@ -54,10 +54,10 @@ void rotate(int dim, pixel *src, pixel *dst) {
 	int tile_size_x, tile_size_y;
 	if (dim <= 1024) {
 		tile_size_x = 32;
-		tile_size_y = 2;
+		tile_size_y = 16;
 	} else {
 		tile_size_x = 16;
-		tile_size_y = 2;
+		tile_size_y = 16;
 	}
 	int i, j, x, y, i_limit, j_limit;
 
