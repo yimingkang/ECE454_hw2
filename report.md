@@ -1,13 +1,13 @@
 ECE454 HW2
 ==========
-Yiming Kang 998676730
+Yiming Kang 998676730  
 Zexuan Wang 
 
 In this assignment, we employed various methods to improve the run time (in CPE) of matrix rotation function. A final best speedup of 2.7x is recorded.
 
 Implementation:
 ---------------
-1. We used tiling to break the given matrices into smaller chunch to increaes L1 hit rate (spacial locality + fit into L1 cache).
+1. We used tiling to break the given matrices into smaller chunks to increaes L1 hit rate (spacial locality + fit into L1 cache).
   * Intel i7 4790 has 32kB **deticated** L1 cache per physical CPU core, 8 way set-associative. Each cahce line is 64 bytes long
   * Each pixel has 3 shorts (6 bytes). L1 cache is able to fit 32 * 1024 / 6 = 5461 pixels
   * Since we used src and dst matricies, each matrix has a max size of 5461/2 = 3720 pixels
