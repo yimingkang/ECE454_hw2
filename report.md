@@ -1,7 +1,7 @@
 ECE454 HW2
 ==========
 Yiming Kang 998676730  
-Zexuan Wang 
+Zexuan Wang 998851773
 
 In this assignment, we employed various methods to improve the run time (in CPE) of matrix rotation function. A final best speedup of 2.7x is recorded.
 
@@ -23,7 +23,7 @@ Implementation:
   * We found that this is already done by the compiler in -O2
 
 3. Code motion
-  * The preprocessor macro RIDX has a multiplication that can be moved outside of the innermost loop. However doing so had no influence in performance
+  * The preprocessor macro RIDX has a multiplication that can be moved outside of the innermost loop. However doing so had no influence in performance and it's most likely already done by the compiler.
 
 
 Scripts:
