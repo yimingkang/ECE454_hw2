@@ -13,6 +13,7 @@ Implementation:
   * Since we used src and dst matricies, each matrix has a max size of 5461/2 = 3720 pixels
   * We used a scrpit to find the best dimensions for the matrices (see script\_1)
   * The best dimensions are:
+
 | Matrix size | Src len (pixel) | Src width (pixel) |
 | ----------- | --------------- | ----------------- |
 | < 1024      | 32              | 2                 |
